@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_d9I9gMunEfG7wKmKK4zzmw" targetNamespace="http://tns.tibco.com/bw/composite/ProgettoATM" name="ProgettoATM" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:component xmi:id="_eo_W4MunEfG7wKmKK4zzmw" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_eo_98MunEfG7wKmKK4zzmw" processName="progettoatm.Process"/>
+  </sca:component>
+</sca:composite>

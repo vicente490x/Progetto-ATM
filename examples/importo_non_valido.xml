@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TransazioneATM>
+  <Cliente>
+    <Nome>Mario</Nome>
+    <Cognome>Rossi</Cognome>
+    <PIN>12345</PIN>
+  </Cliente>
+  <DettagliPrelievo>
+    <Importo>-50</Importo>
+    <DataOra>2026-10-19T11:00:00</DataOra>
+  </DettagliPrelievo>
+</TransazioneATM>

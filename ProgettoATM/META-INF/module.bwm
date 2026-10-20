@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sca:composite xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:version="2.0" xmi:id="_d9I9gMunEfG7wKmKK4zzmw" targetNamespace="http://tns.tibco.com/bw/composite/ProgettoATM" name="ProgettoATM" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:property xmi:id="_ffReoMunEfG7wKmKK4zzmw" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ffmOwMunEfG7wKmKK4zzmw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_fftjgMunEfG7wKmKK4zzmw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ffycAMunEfG7wKmKK4zzmw" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ff37kMunEfG7wKmKK4zzmw" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ff80EMunEfG7wKmKK4zzmw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_fgBskMunEfG7wKmKK4zzmw" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_fgEv4MunEfG7wKmKK4zzmw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_fgK2gMunEfG7wKmKK4zzmw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_eo_W4MunEfG7wKmKK4zzmw" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_eo_98MunEfG7wKmKK4zzmw" processName="progettoatm.ATMCompleto"/>
+  </sca:component>
+</sca:composite>

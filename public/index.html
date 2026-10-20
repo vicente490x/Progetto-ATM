@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ATM didattico · Prelievo</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="card">
+    <header>
+      <p class="eyebrow">Progetto d'esame · TIBCO BW 6</p>
+      <h1>Prelievo ATM</h1>
+      <p>Inserisci i dati di prova e scegli l'importo. La pagina salva una richiesta XML che TIBCO elaborerà.</p>
+    </header>
+
+    <form id="withdrawal-form" novalidate>
+      <div class="fields">
+        <label>Nome <input name="nome" autocomplete="given-name" maxlength="100" required></label>
+        <label>Cognome <input name="cognome" autocomplete="family-name" maxlength="100" required></label>
+      </div>
+      <label>PIN <input name="pin" type="password" inputmode="numeric" autocomplete="off" maxlength="5" pattern="[0-9]{5}" required></label>
+
+      <fieldset>
+        <legend>Quanto vuoi prelevare?</legend>
+        <div class="amounts">
+          <label><input type="radio" name="sceltaImporto" value="50" checked> 50 €</label>
+          <label><input type="radio" name="sceltaImporto" value="100"> 100 €</label>
+          <label><input type="radio" name="sceltaImporto" value="200"> 200 €</label>
+          <label><input type="radio" name="sceltaImporto" value="altro"> Altro importo</label>
+        </div>
+        <label class="custom-label" for="custom-amount">Importo personalizzato in euro</label>
+        <input id="custom-amount" type="text" inputmode="decimal" placeholder="Es. 80,00" disabled>
+        <p class="hint">Usa la virgola o il punto; massimo due decimali. Sono ammessi anche 80 €.</p>
+      </fieldset>
+
+      <p id="chosen-amount" class="chosen">Importo selezionato: 50,00 €</p>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <button type="submit">Conferma Prelievo</button>
+      <button id="check-status" class="secondary" type="button" disabled>Controlla stato TIBCO</button>
+    </form>
+    <footer>Demo con clienti fittizi. Il PIN è presente nell'XML della traccia e non va usato in un sistema reale.</footer>
+  </main>
+</body>
+</html>
