@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:subject="http://xsd.tns.tibco.com/trinity/models/identity/subject" xmi:id="_SCwwwcxYEfGNsYVEDmj7Wg" name="progettoatm.ConnessionePostgres" type="jdbc:JdbcDataSource">
+<?xml version='1.0' encoding='UTF-8'?>
+<jndi:namedResource xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:subject="http://xsd.tns.tibco.com/trinity/models/identity/subject" xmi:version="2.0" xmi:id="_SCwwwcxYEfGNsYVEDmj7Wg" name="progettoatm.ConnessionePostgres" type="jdbc:JdbcDataSource">
   <jndi:reference xmi:id="_SD7OYMxYEfGNsYVEDmj7Wg" key="subjectJndiName" type="subject:SubjectConfiguration" value=""/>
-  <jndi:configuration xsi:type="jdbc:JdbcDataSource" xmi:id="_SD7OYcxYEfGNsYVEDmj7Wg" username="postgres" password="#!2mgdAV0Zrjuwg9EsLYoKMXnsG2T7a+PG">
+  <jndi:configuration xsi:type="jdbc:JdbcDataSource" xmi:id="_SD7OYcxYEfGNsYVEDmj7Wg" username="postgres" password="">
     <connectionConfig xsi:type="jdbc:NonXaConnection" xmi:id="_SD9DkMxYEfGNsYVEDmj7Wg" jdbcDriver="tibcosoftwareinc.jdbc.postgresql.PostgreSQLDriver" dbURL="jdbc:tibcosoftwareinc:postgresql://localhost:5432;DatabaseName=atm_didattico"/>
   </jndi:configuration>
 </jndi:namedResource>

@@ -1,33 +1,15 @@
-# Credenziali
+.metadata/
+.bsProject/
+.com.tibco.bw.rad/
 .env
-.env.*
-!.env.example
-*.pem
-*.key
-secrets.json
-
-# Python
-__pycache__/
-*.pyc
-.venv/
-
-# Java
-target/
-*.class
-
-# Node.js
 node_modules/
-.next/
-dist/
-
-# Editor
-.vscode/
-.idea/
-
-# Sistema operativo
-Thumbs.db
-.DS_Store
-
-# Backup database
-*.backup
-*.dump
+**/bin/
+**/target/
+input/*
+processed/*
+error/*
+!input/.gitkeep
+!processed/.gitkeep
+!error/.gitkeep
+*.log
+__pycache__/

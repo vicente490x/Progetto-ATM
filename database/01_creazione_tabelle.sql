@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS public.clienti (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nome VARCHAR(100) NOT NULL CHECK (length(btrim(nome)) > 0),
     cognome VARCHAR(100) NOT NULL CHECK (length(btrim(cognome)) > 0),
-    -- Testuale per conservare anche PIN come 01234. Solo per la demo.
+    -- Testuale per conservare anche PIN come 01234. Previsto dalla traccia del progetto.
     pin VARCHAR(5) NOT NULL UNIQUE CHECK (pin ~ '^[0-9]{5}$'),
     -- Saldo contabile: le prenotazioni saranno sottratte per la disponibilita'.
     saldo_centesimi BIGINT NOT NULL CHECK (saldo_centesimi >= 0)
@@ -42,12 +42,6 @@ CREATE TABLE IF NOT EXISTS public.transazioni (
 CREATE INDEX IF NOT EXISTS transazioni_cliente_stato_idx
     ON public.transazioni (cliente_id, stato);
 
-INSERT INTO public.clienti (nome, cognome, pin, saldo_centesimi)
-VALUES
-    ('Mario', 'Rossi', '12345', 50000),
-    ('Èlia', 'D’Amico-Rossi', '01234', 50000)
-ON CONFLICT (pin) DO NOTHING;
-
 COMMIT;
 
 -- Verifica finale: non mostriamo il PIN nel risultato.
@@ -59,3 +53,4 @@ SELECT
     (saldo_centesimi / 100.0)::NUMERIC(18, 2) AS saldo_euro
 FROM public.clienti
 ORDER BY id;
+
