@@ -7,6 +7,8 @@ from datetime import datetime, timezone
 from functools import partial
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from playwright.sync_api import sync_playwright
+from lxml import etree
+SCHEMA = None
 
 ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'test-results';OUT.mkdir(exist_ok=True)
@@ -16,6 +18,9 @@ server=ThreadingHTTPServer(('127.0.0.1',0),partial(Handler,directory=str(ROOT/'p
 threading.Thread(target=server.serve_forever,daemon=True).start()
 URL=f'http://127.0.0.1:{server.server_port}'
 results=[]
+SCHEMA=etree.XMLSchema(etree.parse(str(ROOT/'ProgettoATM/Schemas/TransazioneATM.xsd')))
+def validate_xml(p):
+    for name,text in files(p):SCHEMA.assertValid(etree.fromstring(text.encode()))
 
 def fill(p,pin='12345',name='Mario',surname='Rossi',amount=None):
     p.locator('[name=nome]').fill(name);p.locator('[name=cognome]').fill(surname)
@@ -32,7 +37,7 @@ def wait_saved(p):p.wait_for_function("document.querySelector('#status').textCon
 def check(x,m):assert x,m
 
 def standard(p):
-    fill(p);send(p);wait_saved(p);a=files(p);check(len(a)==1,'Un XML');check('<Importo>50</Importo>' in a[0][1],'Importo 50');uuid.UUID(a[0][0][:-4]);check('eseguito da TIBCO' not in status(p),'Nessun falso successo')
+    fill(p);send(p);wait_saved(p);a=files(p);check(len(a)==1,'Un XML');check('<Importo>50</Importo>' in a[0][1],'Importo 50');uuid.UUID(a[0][0][:-4]);check('eseguito da TIBCO' not in status(p),'Nessun falso successo');validate_xml(p)
 
 def invalid_pin(p):
     for pin in ['123','12a45','123456']:
@@ -46,6 +51,8 @@ def names(p):
 def unicode(p):
     fill(p,pin='01234',name=' Èlia ',surname=' D’Amico-Rossi ');send(p);wait_saved(p);x=files(p)[0][1]
     check('<Nome>Èlia</Nome>' in x and '<Cognome>D’Amico-Rossi</Cognome>' in x and '<PIN>01234</PIN>' in x,'Unicode e zero iniziale')
+    archive(p);p.locator('#check-status').click();p.locator('#next-request').click();fill(p,name=" Anna Maria ",surname=" O'Connor ");send(p);wait_saved(p)
+    texts=[v for n,v in files(p)];check(any('<Nome>Anna Maria</Nome>' in v and '<Cognome>O&apos;Connor</Cognome>' in v for v in texts),'Apostrofo semplice e nome composto');validate_xml(p)
 
 def amounts(p):
     for value in ['', '0','-10','abc','NaN','Infinity','1e2','10.001']:
@@ -74,7 +81,7 @@ def conflict(p):
     fill(p);send(p);wait_saved(p);archive(p,content='contenuto differente');p.locator('#check-status').click();check('contenuto diverso' in status(p),'Conflitto archivio');check(p.locator('#next-request').is_disabled(),'Nessuna nuova richiesta')
 
 def write_failure(p):
-    p.evaluate("FileSystemFileHandle.prototype.createWritable=async()=>{throw new DOMException('Scrittura negata','NotAllowedError')}")
+    p.evaluate("() => { FileSystemFileHandle.prototype.createWritable=async()=>{throw new DOMException('Scrittura negata','NotAllowedError')}; }")
     fill(p);send(p);p.wait_for_function("document.querySelector('#status').textContent.includes('non confermato')");check(p.locator('[type=submit]').is_disabled(),'Esito incerto blocca nuovo ID');check(p.evaluate("!!localStorage.getItem('atm.pending')"),'UUID conservato')
 
 def layout(p):
@@ -82,7 +89,7 @@ def layout(p):
     p.locator('[name=nome]').focus();p.keyboard.press('Tab');check(p.locator('[name=cognome]').evaluate('e=>e===document.activeElement'),'Ordine tastiera');p.screenshot(path=str(OUT/'frontend-375.png'),full_page=True)
 
 def two_ids(p):
-    fill(p);send(p);wait_saved(p);first=files(p)[0][0];archive(p);p.locator('#check-status').click();p.locator('#next-request').click();fill(p);send(p);wait_saved(p);check(len({n for n,x in files(p)})==2,'UUID distinti')
+    fill(p);send(p);wait_saved(p);first=files(p)[0][0];archive(p);p.locator('#check-status').click();p.locator('#next-request').click();fill(p);send(p);wait_saved(p);check(len({n for n,x in files(p)})==2,'UUID distinti');validate_xml(p)
 
 with sync_playwright() as pw:
     browser=pw.chromium.launch(headless=True)

@@ -123,6 +123,11 @@ def rejected_retry():
     with connect() as c:c.execute('UPDATE clienti SET saldo_centesimi=100000 WHERE id=1')
     check(request(60000,id=id)[0]=='RIFIUTATA','UUID rifiutato non riattivato');check(state()[0][0][0]==100000,'Nessun addebito tardivo')
 
+def unicode_names():
+    check(request(name=' Èlia ',surname=' D’Amico-Rossi ',pin='01234')==('OK',45000),'Unicode e trim')
+    with connect() as c:c.execute('INSERT INTO clienti(nome,cognome,pin,saldo_centesimi) VALUES(%s,%s,%s,%s)',('Anna Maria',"O'Connor",'56789',50000))
+    check(request(name=' Anna Maria ',surname=" O'Connor ",pin='56789')==('OK',45000),'Apostrofo semplice e nome composto')
+
 def xml_validation():
     def xml(pin='<PIN>01234</PIN>',amount='80.50',name='Èlia'):
         return f'<TransazioneATM><Cliente><Nome>{name}</Nome><Cognome>D’Amico-Rossi</Cognome>{pin}</Cliente><DettagliPrelievo><Importo>{amount}</Importo><DataOra>2026-10-21T20:00:00+02:00</DataOra></DettagliPrelievo></TransazioneATM>'.encode()
@@ -147,7 +152,7 @@ run('DB10','UUID concorrente clienti diversi',lambda:concurrent(True,True))
 run('DB11','Rollback atomico',rollback)
 run('DB12','Persistenza tra connessioni',persistence)
 run('DB13','Replay di richiesta rifiutata',rejected_retry)
-run('DB14','PIN iniziale e nominativo Unicode',lambda:check(request(name=' Èlia ',surname=' D’Amico-Rossi ',pin='01234')==('OK',45000),'Unicode e trim'))
+run('DB14','PIN iniziale e nominativo Unicode',unicode_names)
 run('DB15','Importo 80 euro',lambda:check(request(8000)==('OK',42000),'Importo libero'))
 run('DB16','Importo 80.50 euro',lambda:check(request(8050)==('OK',41950),'Centesimi esatti'))
 run('XSD01','Validazione contratto XML',xml_validation)
