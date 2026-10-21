@@ -2,28 +2,34 @@
 
 Data: 21 ottobre 2026.
 
-## Eseguite in questo ambiente
+## Esecuzione e risultati
 
-- Sintassi JavaScript: `node --check public/app.js` superata.
-- Esecuzione del frontend con DOM e filesystem sostituiti da oggetti di test: validazione PIN, escape XML, conservazione dello zero iniziale, blocco del doppio invio, stato in attesa, conferma solo dopo processed, nuova richiesta esplicita. Superata. È un test isolato, non un collaudo browser–TIBCO.
-- Parsing XML di BWP, XSD, configurazioni JDBC e modulo; parsing degli XSLT incorporati. Superato.
-- Collegamenti del processo: dieci attività e nove transizioni, ciascuna con una sorgente e una destinazione. Superato.
-- Una query JDBC parametrizzata, cinque parametri; nessuna chiamata alle vecchie funzioni PostgreSQL. Verificato staticamente.
+[Esecuzione GitHub Actions 39643799067](https://github.com/vicente490x/Progetto-ATM/actions/runs/39643799067), conclusa con successo sulla revisione `493774204756ef8dfb936e5840fd24597bc552b2`.
 
-## Non eseguite qui
+| Ambito | Prove superate | Evidenza |
+| --- | ---: | --- |
+| PostgreSQL 16.15 reale e isolato | 16 | [database.json](evidenze/database.json), DB01–DB16 |
+| Validazione XSD con più varianti | 1 | [database.json](evidenze/database.json), XSD01 |
+| Chromium 134.0.6998.35 | 15 | [browser.json](evidenze/browser.json), FE01–FE15 |
+| Totale | 32 | Workflow `.github/workflows/collaudo-atm.yml` |
 
-Il runtime proprietario BW/Business Studio e PostgreSQL non sono disponibili in questo ambiente. Non è stata eseguita una build TIBCO né un'operazione reale sul database. I controlli XML non garantiscono la validazione semantica del modello BW.
+La query SQL viene estratta direttamente da `ATMCompleto.bwp`. Le prove coprono addebito, saldo insufficiente, credenziali errate, stringhe SQL ostili, replay UUID, conflitti di cliente/importo, saldo esatto, vecchie prenotazioni, concorrenza, rollback, persistenza fra connessioni, nominativi Unicode, apostrofi, PIN con zero iniziale e importi decimali. Il database contiene soltanto dati sintetici del collaudo; il test rifiuta un database non vuoto.
 
-Prima dell'utilizzo verificare su Business Studio:
+I test browser eseguono la pagina reale con Playwright e filesystem OPFS reale. Il selettore della cartella viene sostituito e i file di esito in processed/error vengono predisposti dal test. Verificano validazione, XML, UUID, doppio invio, ricaricamento, stato pendente, riconoscimento degli esiti, errore di scrittura iniettato, focus da Nome a Cognome e assenza di overflow orizzontale a 375 px. Non verificano il picker del sistema operativo, i suoi permessi, l'accesso da smartphone o l'esecuzione di TIBCO.
 
-1. Importazione, Validate, compilazione e avvio; compatibilità del flag modifyEvent e delle espressioni XPath con BW installato.
-2. Selezione cartella da Chrome/Edge e permessi sul percorso effettivo.
-3. Prelievo valido: un solo addebito, una transazione ESEGUITA, file in processed.
-4. PIN errato, saldo insufficiente, XML non valido: nessun addebito; rifiuto visibile.
-5. Stesso UUID e stessi dati: nessun secondo addebito. UUID con importo diverso: conflitto.
-6. Due richieste superiori complessivamente al saldo: nessun saldo negativo; consistenza saldo/storico.
-7. Database indisponibile e ripresa con stesso UUID; arresto dopo commit ma prima dell'archiviazione.
-8. File temporaneamente vuoto durante la scrittura, errore di scrittura e ricaricamento del browser.
-9. Richieste PRENOTATA della versione precedente: migrazione bloccata fino alla loro risoluzione.
+Sono stati inoltre verificati localmente sintassi JavaScript, parsing XML/XSLT, collegamenti delle attività e presenza di una query JDBC con cinque parametri. Questi controlli statici non sostituiscono la validazione semantica di Business Studio.
 
-Non sono stati marcati come superati casi nell'Excel storico. Lo storico documenta esclusivamente la vecchia versione.
+## Documenti aggiornati
+
+- [TAD](TAD_Architettura_Tecnica_ATM.docx): architettura, flusso XML, query JDBC, concorrenza, configurazione, migrazione e limiti del collaudo.
+- [Casi di test](Casi_di_test_ATM.xlsx): tutti i 31 casi compilati, 18 superati e 13 bloccati. Ogni riga dichiara il proprio ambito e richiama le evidenze. I contatori sono formule; nessun successo storico della versione REST è riportato come prova della nuova versione.
+
+I 32 controlli automatici e i 31 casi del documento hanno granularità diversa: un caso può richiamare più controlli e richiedere ulteriori prove integrate. La data nei casi bloccati indica la valutazione del blocco.
+
+## Verifiche ancora necessarie
+
+Casi bloccati: TC_01, TC_03, TC_14, TC_21, TC_22, TC_23, TC_24, TC_25, TC_26, TC_27, TC_29, TC_30, TC_31.
+
+Occorre un ambiente con Business Studio/BusinessWorks per validare, compilare e avviare il progetto. Restano da provare il flusso pagina–File Poller–JDBC–archivio, il replay attraverso BW, il riavvio con input pendenti, il fallimento dell'archiviazione dopo commit e gli eventi create/modify sui file vuoti o parziali. Servono inoltre cartelle reali per picker e permessi, interruzione durante la scrittura e una condivisione UNC fra due computer.
+
+Le verifiche SQL e browser parziali di questi casi sono riportate nell'Excel. Il progetto non è dichiarato collaudato end-to-end finché tali prove non vengono completate.

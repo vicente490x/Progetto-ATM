@@ -32,6 +32,10 @@ Le vecchie funzioni PostgreSQL non sono più chiamate. Non vengono eliminate aut
 
 ## Documentazione e verifica
 
-Vedi [architettura](docs/ARCHITETTURA.md) e [verifiche](docs/VERIFICHE.md). I documenti Office originali sono conservati in `docs/storico/`: descrivono la versione precedente e i loro esiti di test non certificano questo branch.
+- [TAD aggiornato](docs/TAD_Architettura_Tecnica_ATM.docx)
+- [Tabella dei 31 casi di test](docs/Casi_di_test_ATM.xlsx)
+- [Architettura](docs/ARCHITETTURA.md) e [risultati ed evidenze](docs/VERIFICHE.md)
 
-La validazione XML e i controlli locali non sostituiscono importazione, build e collaudo in Business Studio. Questo branch richiede ancora la verifica integrata sul runtime TIBCO e PostgreSQL dell'utente.
+Il collaudo automatico ha superato 32 verifiche su PostgreSQL reale, XSD e Chromium. Nell'Excel sono compilati tutti i 31 casi: 18 superati nel perimetro dichiarato e 13 bloccati in attesa di runtime TIBCO, cartelle reali o infrastruttura di laboratorio. Le prove browser usano OPFS con picker sostituito ed esiti predisposti dal test; non costituiscono collaudo end-to-end BW.
+
+I documenti Office originali in `docs/storico/` descrivono la versione precedente. I loro esiti non sono trasferiti a questo branch. Restano da eseguire importazione, validazione, build e collaudo integrato in Business Studio.

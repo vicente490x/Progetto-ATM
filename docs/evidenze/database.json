@@ -1,0 +1,128 @@
+{
+  "data_utc": "2026-10-21T17:26:57.384551+00:00",
+  "commit": "493774204756ef8dfb936e5840fd24597bc552b2",
+  "postgresql": "PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit",
+  "bwp_sha256": "9158183d996243358f4aa10be80efd3c6a66c745bfb44331cfb819406e46fa3c",
+  "scope": "Query JDBC estratta dal BWP su PostgreSQL reale; nessun runtime TIBCO",
+  "risultati": [
+    {
+      "id": "DB01",
+      "scenario": "Prelievo standard",
+      "esito": "Superato",
+      "dettaglio": "50000 -> 45000 centesimi; una ESEGUITA da 5000",
+      "durata_ms": 34
+    },
+    {
+      "id": "DB02",
+      "scenario": "Saldo insufficiente",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 31
+    },
+    {
+      "id": "DB03",
+      "scenario": "Credenziali e input SQL ostile",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 55
+    },
+    {
+      "id": "DB04",
+      "scenario": "Ripetizione UUID",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 49
+    },
+    {
+      "id": "DB05",
+      "scenario": "Conflitto UUID",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 63
+    },
+    {
+      "id": "DB06",
+      "scenario": "Disponibilità esatta",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 56
+    },
+    {
+      "id": "DB07",
+      "scenario": "Prenotazioni precedenti",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 70
+    },
+    {
+      "id": "DB08",
+      "scenario": "Richieste concorrenti",
+      "esito": "Superato",
+      "dettaglio": "Esiti ['SALDO_INSUFFICIENTE', 'OK']; saldi [(2000,), (50000,)]; storico [('ESEGUITA', 8000), ('RIFIUTATA', 8000)]",
+      "durata_ms": 52
+    },
+    {
+      "id": "DB09",
+      "scenario": "UUID concorrente stesso cliente",
+      "esito": "Superato",
+      "dettaglio": "Esiti ['OK', 'RICHIESTA_DA_VERIFICARE']; saldi [(2000,), (50000,)]; storico [('ESEGUITA', 8000)]",
+      "durata_ms": 61
+    },
+    {
+      "id": "DB10",
+      "scenario": "UUID concorrente clienti diversi",
+      "esito": "Superato",
+      "dettaglio": "Esiti ['RICHIESTA_DA_VERIFICARE', 'OK']; saldi [(10000,), (42000,)]; storico [('ESEGUITA', 8000)]",
+      "durata_ms": 52
+    },
+    {
+      "id": "DB11",
+      "scenario": "Rollback atomico",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 53
+    },
+    {
+      "id": "DB12",
+      "scenario": "Persistenza tra connessioni",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 77
+    },
+    {
+      "id": "DB13",
+      "scenario": "Replay di richiesta rifiutata",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 47
+    },
+    {
+      "id": "DB14",
+      "scenario": "PIN iniziale e nominativo Unicode",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 40
+    },
+    {
+      "id": "DB15",
+      "scenario": "Importo 80 euro",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 24
+    },
+    {
+      "id": "DB16",
+      "scenario": "Importo 80.50 euro",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 23
+    },
+    {
+      "id": "XSD01",
+      "scenario": "Validazione contratto XML",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni superate",
+      "durata_ms": 14
+    }
+  ]
+}
