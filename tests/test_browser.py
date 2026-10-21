@@ -75,10 +75,10 @@ def double(p):
     check(len(files(p))==1,'Un invio');check('<Importo>100</Importo>' in files(p)[0][1],'Radio prevale');check(p.locator('[type=submit]').is_disabled(),'Blocco in attesa')
 
 def outcome(p):
-    fill(p);send(p);wait_saved(p);p.locator('#check-status').click();check('non ancora disponibile' in status(p),'Attesa');archive(p);p.locator('#check-status').click();check('eseguito da TIBCO' in status(p),'Conferma archivio');check(p.locator('[name=pin]').input_value()=='','PIN cancellato');p.locator('#next-request').click();check(not p.locator('[type=submit]').is_disabled(),'Nuova richiesta esplicita')
+    fill(p);send(p);wait_saved(p);p.locator('#check-status').click();p.wait_for_function("document.querySelector('#status').textContent.includes('non ancora disponibile')");check('non ancora disponibile' in status(p),'Attesa');archive(p);p.locator('#check-status').click();p.wait_for_function("document.querySelector('#status').textContent.includes('eseguito da TIBCO')");check('eseguito da TIBCO' in status(p),'Conferma archivio');check(p.locator('[name=pin]').input_value()=='','PIN cancellato');p.locator('#next-request').click();check(not p.locator('[type=submit]').is_disabled(),'Nuova richiesta esplicita')
 
 def conflict(p):
-    fill(p);send(p);wait_saved(p);archive(p,content='contenuto differente');p.locator('#check-status').click();check('contenuto diverso' in status(p),'Conflitto archivio');check(p.locator('#next-request').is_disabled(),'Nessuna nuova richiesta')
+    fill(p);send(p);wait_saved(p);archive(p,content='contenuto differente');p.locator('#check-status').click();p.wait_for_function("document.querySelector('#status').textContent.includes('contenuto diverso')");check('contenuto diverso' in status(p),'Conflitto archivio');check(p.locator('#next-request').is_disabled(),'Nessuna nuova richiesta')
 
 def write_failure(p):
     p.evaluate("() => { FileSystemFileHandle.prototype.createWritable=async()=>{throw new DOMException('Scrittura negata','NotAllowedError')}; }")
