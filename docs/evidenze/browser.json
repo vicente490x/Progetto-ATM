@@ -1,0 +1,99 @@
+{
+  "data_utc": "2026-10-21T17:27:07.161266+00:00",
+  "commit": "493774204756ef8dfb936e5840fd24597bc552b2",
+  "chromium": "134.0.6998.35",
+  "app_sha256": "b3aa5877c364e262dde526c31d1b9b37b8e7cb7bf4ebd545c13b0c118e8720f7",
+  "scope": "Browser reale e OPFS; nessun picker OS o motore TIBCO",
+  "risultati": [
+    {
+      "id": "FE01",
+      "scenario": "XML standard",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE02",
+      "scenario": "PIN non valido",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE03",
+      "scenario": "Importo libero",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE04",
+      "scenario": "Campi vuoti",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE05",
+      "scenario": "Unicode e PIN zero",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE06",
+      "scenario": "Importi non validi",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE07",
+      "scenario": "Decimali",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE08",
+      "scenario": "Escape XML",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE09",
+      "scenario": "Ripresa dopo reload",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE10",
+      "scenario": "Radio e doppio invio",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE11",
+      "scenario": "Conferma archivio",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE12",
+      "scenario": "Conflitto archivio",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE13",
+      "scenario": "Errore scrittura iniettato",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE14",
+      "scenario": "Layout e tastiera",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    },
+    {
+      "id": "FE15",
+      "scenario": "UUID distinti",
+      "esito": "Superato",
+      "dettaglio": "Asserzioni eseguite in Chromium con filesystem OPFS reale; picker e archiviazione di esito controllati dal test."
+    }
+  ]
+}

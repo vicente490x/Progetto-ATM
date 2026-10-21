@@ -4,17 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ATM didattico · Prelievo</title>
-  <link rel="stylesheet" href="/style.css">
-  <script src="/app.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
   <main class="card">
     <header>
       <p class="eyebrow">Progetto d'esame · TIBCO BW 6</p>
       <h1>Prelievo ATM</h1>
-      <p>Inserisci i dati di prova e scegli l'importo. La pagina salva una richiesta XML che TIBCO elaborerà.</p>
+      <p>Collega la cartella del progetto, inserisci i dati e scegli l’importo. TIBCO verifica ed esegue il prelievo.</p>
     </header>
 
+    <button id="connect" type="button">Collega cartella TIBCO</button>
     <form id="withdrawal-form" novalidate>
       <div class="fields">
         <label>Nome <input name="nome" autocomplete="given-name" maxlength="100" required></label>
@@ -39,8 +40,10 @@
       <p id="status" class="status" role="status" aria-live="polite"></p>
       <button type="submit">Conferma Prelievo</button>
       <button id="check-status" class="secondary" type="button" disabled>Controlla stato TIBCO</button>
+    <button id="next-request" type="button" disabled>Nuovo prelievo</button>
     </form>
-    <footer>Demo con clienti fittizi. Il PIN è presente nell'XML della traccia e non va usato in un sistema reale.</footer>
+    <footer>Progetto ATM · Elaborazione TIBCO BusinessWorks · PostgreSQL</footer>
   </main>
 </body>
 </html>
+

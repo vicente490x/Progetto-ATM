@@ -1,3 +1,0 @@
-JDBC_DB_URL=jdbc\:tibcosoftwareinc\:postgresql\://<host>\:<port>;DatabaseName\=<dbname>
-JDBC_DRIVER=tibcosoftwareinc.jdbc.postgresql.PostgreSQLDriver
-eclipse.preferences.version=1

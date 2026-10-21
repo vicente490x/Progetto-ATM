@@ -1,0 +1,55 @@
+name: Collaudo ATM
+on:
+  push:
+    branches: [refactor/tibco-only-no-rest]
+    paths: ['ProgettoATM/**', 'database/**', 'public/**', 'tests/**', '.github/workflows/collaudo-atm.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  postgres:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: atm_test
+          POSTGRES_PASSWORD: test-only-ephemeral
+          POSTGRES_DB: atm_didattico
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready --health-interval 5s
+          --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'psycopg[binary]==3.2.6' 'lxml==5.3.1'
+      - name: Test PostgreSQL e XSD reali
+        env:
+          ATM_TEST_DSN: postgresql://atm_test:test-only-ephemeral@localhost:5432/atm_didattico
+        run: python tests/test_database.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: risultati-collaudo
+          path: test-results/
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'playwright==1.51.0' 'lxml==5.3.1'
+      - run: python -m playwright install --with-deps chromium
+      - name: Test frontend in Chromium
+        run: python tests/test_browser.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: risultati-browser
+          path: test-results/
